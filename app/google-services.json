@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "973559003078",
+    "project_id": "push-sampler-e5855",
+    "storage_bucket": "push-sampler-e5855.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:973559003078:android:fd651e021822f5a8ab24c7",
+        "android_client_info": {
+          "package_name": "com.example.pushsampler"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHELiDcKTlZBJXq59Nymi7O7MzSD8c9Aw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
