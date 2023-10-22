@@ -1,43 +1,42 @@
 package com.example.pushsampler
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.app.ActivityCompat
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import com.example.pushsampler.ui.theme.PushSamplerTheme
 import com.google.firebase.FirebaseApp
-import com.google.firebase.messaging.FirebaseMessagingService
-import com.google.firebase.messaging.RemoteMessage
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.android.gms.tasks.OnCompleteListener
 
 class MainActivity : ComponentActivity() {
+    private val TAG = "MainActivity"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            FirebaseApp.initializeApp(this) // initiating firebase
+        setContentView(R.layout.activity_main)
+
+        // Initialize Firebase
+        FirebaseApp.initializeApp(this)
 
 
-            PushSamplerTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                }
+        // Retrieve the FCM token
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                // If there's an error in retrieving the token, log it.
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
             }
-        }
+
+            // Get new FCM registration token
+            val token = task.result
+
+            // Log the token for debugging purposes
+            Log.d(TAG, "FCM Token: $token")
+
+            // Display a short toast message with the token
+            Toast.makeText(baseContext, "FCM Token: $token", Toast.LENGTH_SHORT).show()
+        })
     }
 }
-
