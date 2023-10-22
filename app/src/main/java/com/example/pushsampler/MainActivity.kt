@@ -11,7 +11,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.google.android.gms.tasks.OnCompleteListener
 
 class MainActivity : ComponentActivity() {
-    private val TAG = "MainActivity"
+    private val TAG = "MainActivityy"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
